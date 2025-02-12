@@ -1,6 +1,6 @@
 public class StringCompression {
     public static String compressedStringImperative(String word) {
-        if(word.isEmpty())
+        if (word.isEmpty())
             return "";
         char[] characters = word.toCharArray();
         StringBuilder result = new StringBuilder(Character.toString(characters[0]));
@@ -23,7 +23,26 @@ public class StringCompression {
     }
 
     public static String decompressedStringImperative(String word) {
-        return word;
+        if (word.isEmpty())
+            return "";
+        char[] characters = word.toCharArray();
+        StringBuilder result = new StringBuilder();
+        char curCharacter = 0;
+        StringBuilder counter = new StringBuilder();
+        for (char character : characters) {
+            if (Character.isLetter(character)) {
+                if (curCharacter != 0) {
+                    result.append(String.format("%c", curCharacter).repeat(Integer.parseInt(counter.toString())));
+                }
+                curCharacter = character;
+                counter = new StringBuilder();
+            }
+            else {
+                counter.append(character);
+            }
+        }
+        result.append(String.format("%c", curCharacter).repeat(Integer.parseInt(counter.toString())));
+        return result.toString();
     }
 
     public static String decompressedStringStream(String word) {
