@@ -28,16 +28,13 @@ public class StringCompression {
         char[] characters = word.toCharArray();
         StringBuilder result = new StringBuilder();
         char curCharacter = 0;
-        StringBuilder counter = new StringBuilder();
+        StringBuilder counter = new StringBuilder("0");
         for (char character : characters) {
             if (Character.isLetter(character)) {
-                if (curCharacter != 0) {
-                    result.append(String.format("%c", curCharacter).repeat(Integer.parseInt(counter.toString())));
-                }
+                result.append(String.format("%c", curCharacter).repeat(Integer.parseInt(counter.toString())));
                 curCharacter = character;
                 counter = new StringBuilder();
-            }
-            else {
+            } else {
                 counter.append(character);
             }
         }
